@@ -2,6 +2,8 @@
 
 Autonomous finance review powered by Claude Code agentics with **specialized self-validating agents**.
 
+> Watch the full walkthrough: [Specialized Self-Validating Agents in Claude Code](https://youtu.be/u5GkG71PkR0)
+
 <img src="images/ssva.png" alt="Specialized Self-Validating Agents" width="800">
 
 ## The Big Idea
@@ -26,6 +28,45 @@ Before this feature, hooks were global (in `settings.json`). Now you can define 
 - **Build agents** that run linters and type checkers on completion
 - **UI agents** that validate HTML output
 
+## The Agentic Finance Review Application
+
+This application processes raw bank CSV exports through a multi-agent pipeline, producing:
+
+**Input:** Raw bank CSVs (checking, savings, credit card statements)
+
+**Output:**
+```
+apps/agentic-finance-review/data/mock_dataset_2026/
+├── agentic_cumulative_dataset_2026.csv    # Year-to-date merged data
+├── index.html                              # Yearly dashboard
+├── assets/                                 # Yearly graphs
+│   └── *.png
+└── mock_dataset_mar_1st_2026/              # Monthly output
+    ├── raw_checkings.csv                   # Original input (copied)
+    ├── normalized_checkings.csv            # Standardized format + categories
+    ├── agentic_merged_transactions.csv     # All accounts merged
+    ├── index.html                          # Monthly dashboard
+    └── assets/                             # Generated visualizations
+        ├── plot_01_spending_by_category_pie.png
+        ├── plot_02_daily_spending_trend.png
+        ├── plot_03_income_vs_expenses.png
+        ├── plot_04_top_merchants.png
+        ├── plot_05_category_over_time.png
+        ├── plot_06_running_balance.png
+        ├── plot_07_spending_distribution.png
+        └── plot_08_spending_by_weekday.png
+```
+
+**Pipeline stages:**
+1. **Normalize** - Convert bank-specific formats to standard columns
+2. **Categorize** - Auto-categorize transactions (groceries, utilities, etc.)
+3. **Merge** - Combine all accounts into single dataset
+4. **Accumulate** - Add to year-to-date cumulative file
+5. **Graph** - Generate 8 financial insight visualizations
+6. **Dashboard** - Create interactive HTML report
+
+Each stage has its own specialized agent with targeted validation hooks.
+
 ## Project Structure
 
 ```
@@ -44,13 +85,43 @@ Before this feature, hooks were global (in `settings.json`). Now you can define 
         ├── csv-validator.py
         ├── html-validator.py
         └── ...
+
+mock-input-data/       # Sample bank exports (fictional data)
+├── raw_checkings_*.csv
+└── raw_savings_*.csv
+
+apps/agentic-finance-review/data/   # Generated output
+└── mock_dataset_2026/              # Processed results
 ```
 
 ## Building Specialized Self-Validating Agents
 
 ### Step 1: Create a Focused Prompt
 
-Custom slash commands live in `.claude/commands/`. See [csv-edit.md](.claude/commands/csv-edit.md) for a complete example.
+Custom slash commands live in `.claude/commands/`. Here's [csv-edit.md](.claude/commands/csv-edit.md):
+
+```yaml
+---
+model: opus
+description: Make modifications or report on csv files
+argument-hint: [csv_file] [user_request]
+allowed-tools: Glob, Grep, Read, Edit, Write
+hooks:
+  PostToolUse:
+    - matcher: "Read|Edit|Write"
+      hooks:
+        - type: command
+          command: "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/validators/csv-single-validator.py"
+---
+
+# Purpose
+Make modifications or report on csv files.
+
+## Workflow
+1. Read the CSV File: $1
+2. Make the modification or report: $2
+3. Report the results
+```
 
 **Key frontmatter fields:**
 
@@ -64,7 +135,31 @@ Custom slash commands live in `.claude/commands/`. See [csv-edit.md](.claude/com
 
 ### Step 2: Create a Subagent
 
-Subagents enable **parallelization** and **context isolation**. See [csv-edit-agent.md](.claude/agents/csv-edit-agent.md) for a complete example.
+Subagents enable **parallelization** and **context isolation**. Here's [csv-edit-agent.md](.claude/agents/csv-edit-agent.md):
+
+```yaml
+---
+name: csv-edit-agent
+description: Make modifications or report on csv files. Use only when directly requested.
+tools: Glob, Grep, Read, Edit, Write
+model: opus
+hooks:
+  PostToolUse:
+    - matcher: "Read|Edit|Write"
+      hooks:
+        - type: command
+          command: "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/validators/csv-single-validator.py"
+color: cyan
+---
+
+# Purpose
+Make modifications or report on csv files.
+
+## Workflow
+1. Read the CSV File: DETERMINE FROM PROMPT
+2. Make the modification or report: DETERMINE FROM PROMPT
+3. Report the results
+```
 
 **Prompts vs Subagents:**
 
@@ -161,6 +256,17 @@ A focused agent with one purpose **outperforms** an unfocused agent with many pu
 Specialization + Deterministic Validation = Trust
 ```
 
+## Privacy Warning
+
+> **This is a sample repository for learning agentic patterns.** If you want to use it with real financial data:
+
+1. **Create a private fork** - Never commit real bank statements to a public repo
+2. **Add your data directories to `.gitignore`** - The repo ignores `apps/agentic-finance-review/data/*/` by default, but double-check
+3. **Never commit `.mcp.json`** - Contains API keys (already in `.gitignore`)
+4. **Review before pushing** - Always `git diff` before committing to ensure no sensitive data
+
+The mock data in this repo (`mock-input-data/`) is entirely fictional.
+
 ## Quick Start
 
 ### Mock Data
@@ -205,6 +311,7 @@ claude
 
 ## Documentation
 
+- [Claude Code](https://github.com/anthropics/claude-code)
 - [Claude Code Hooks](https://code.claude.com/docs/en/hooks)
 - [Custom Slash Commands](https://code.claude.com/docs/en/slash-commands)
 - [Subagents](https://code.claude.com/docs/en/sub-agents)
