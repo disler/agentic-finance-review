@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>January 2026 Finance Review</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1a1a2e;
+            color: #e4e4e7;
+            line-height: 1.6;
+            padding: 32px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+            color: #6b7280;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #16213e;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-card {
+            text-align: center;
+        }
+
+        .metric-card .value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .metric-card .label {
+            font-size: 14px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-card.income .value { color: #00d4aa; }
+        .metric-card.expense .value { color: #ff6b6b; }
+        .metric-card.net .value { color: #4dabf7; }
+        .metric-card.count .value { color: #a78bfa; }
+
+        /* Graphs Section */
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #2d2d44;
+        }
+
+        .graphs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .graph-card {
+            background: #16213e;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .graph-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #e4e4e7;
+            margin-bottom: 16px;
+        }
+
+        .graph-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        /* Treemap Section */
+        .treemap-section {
+            margin-bottom: 40px;
+        }
+
+        .treemap {
+            display: flex;
+            flex-wrap: wrap;
+            height: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .treemap-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: 120px;
+            min-height: 80px;
+            padding: 16px;
+            color: #ffffff;
+            text-align: center;
+            transition: filter 0.2s ease;
+        }
+
+        .treemap-item:hover {
+            filter: brightness(1.1);
+        }
+
+        .treemap-item .category {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .treemap-item .amount {
+            font-size: 18px;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Transaction Table */
+        .table-section {
+            margin-bottom: 40px;
+        }
+
+        .table-container {
+            background: #16213e;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 16px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6b7280;
+            border-bottom: 2px solid #2d2d44;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            color: #a78bfa;
+        }
+
+        th .sort-indicator {
+            margin-left: 6px;
+            opacity: 0.5;
+        }
+
+        th.sorted .sort-indicator {
+            opacity: 1;
+        }
+
+        td {
+            padding: 16px 12px;
+            font-size: 14px;
+            border-bottom: 1px solid #2d2d44;
+        }
+
+        tr:nth-child(even) {
+            background: #1a1f3a;
+        }
+
+        tr:hover {
+            background: #1f2a4a;
+        }
+
+        .deposit { color: #00d4aa; font-weight: 600; }
+        .withdrawal { color: #ff6b6b; font-weight: 600; }
+
+        .category-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .category-pill.income { background: rgba(0, 212, 170, 0.2); color: #00d4aa; }
+        .category-pill.interest { background: rgba(77, 171, 247, 0.2); color: #4dabf7; }
+        .category-pill.services { background: rgba(167, 139, 250, 0.2); color: #a78bfa; }
+        .category-pill.groceries { background: rgba(52, 211, 153, 0.2); color: #34d399; }
+        .category-pill.entertainment { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .category-pill.subscriptions { background: rgba(236, 72, 153, 0.2); color: #ec4899; }
+        .category-pill.restaurants { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
+        .category-pill.utilities { background: rgba(96, 165, 250, 0.2); color: #60a5fa; }
+        .category-pill.housing { background: rgba(248, 113, 113, 0.2); color: #f87171; }
+        .category-pill.loans { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+        .category-pill.transfers { background: rgba(45, 212, 191, 0.2); color: #2dd4bf; }
+        .category-pill.merchandise { background: rgba(192, 132, 252, 0.2); color: #c084fc; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .graphs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 16px;
+            }
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .metric-card .value {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>January 2026 Finance Review</h1>
+            <p class="subtitle">January 1 - January 31, 2026</p>
+        </header>
+
+        <!-- Summary Metrics -->
+        <section class="summary-grid">
+            <div class="card metric-card income">
+                <div class="value">$8,251.25</div>
+                <div class="label">Total Income</div>
+            </div>
+            <div class="card metric-card expense">
+                <div class="value">$5,007.59</div>
+                <div class="label">Total Expenses</div>
+            </div>
+            <div class="card metric-card net">
+                <div class="value">$3,243.66</div>
+                <div class="label">Net Savings</div>
+            </div>
+            <div class="card metric-card count">
+                <div class="value">38</div>
+                <div class="label">Transactions</div>
+            </div>
+        </section>
+
+        <!-- Graphs Section -->
+        <section class="graphs-section">
+            <h2 class="section-title">Financial Insights</h2>
+            <div class="graphs-grid">
+                <div class="graph-card">
+                    <h3>Spending by Category</h3>
+                    <img src="assets/plot_01_spending_by_category_pie.png" alt="Spending by Category Pie Chart">
+                </div>
+                <div class="graph-card">
+                    <h3>Daily Spending Trend</h3>
+                    <img src="assets/plot_02_daily_spending_trend.png" alt="Daily Spending Trend">
+                </div>
+                <div class="graph-card">
+                    <h3>Income vs Expenses</h3>
+                    <img src="assets/plot_03_income_vs_expenses.png" alt="Income vs Expenses">
+                </div>
+                <div class="graph-card">
+                    <h3>Top Merchants</h3>
+                    <img src="assets/plot_04_top_merchants.png" alt="Top Merchants">
+                </div>
+                <div class="graph-card">
+                    <h3>Category Spending Over Time</h3>
+                    <img src="assets/plot_05_category_over_time.png" alt="Category Over Time">
+                </div>
+                <div class="graph-card">
+                    <h3>Running Balance</h3>
+                    <img src="assets/plot_06_running_balance.png" alt="Running Balance">
+                </div>
+                <div class="graph-card">
+                    <h3>Spending Distribution</h3>
+                    <img src="assets/plot_07_spending_distribution.png" alt="Spending Distribution">
+                </div>
+                <div class="graph-card">
+                    <h3>Spending by Weekday</h3>
+                    <img src="assets/plot_08_spending_by_weekday.png" alt="Spending by Weekday">
+                </div>
+            </div>
+        </section>
+
+        <!-- Spending Treemap -->
+        <section class="treemap-section">
+            <h2 class="section-title">Spending by Category</h2>
+            <div class="treemap">
+                <div class="treemap-item" style="flex-grow: 48; background: #f87171;">
+                    <span class="category">Housing</span>
+                    <span class="amount">$2,395.00</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 27; background: #a78bfa;">
+                    <span class="category">Services & Supplies</span>
+                    <span class="amount">$1,332.32</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 8; background: #9ca3af;">
+                    <span class="category">Loans</span>
+                    <span class="amount">$423.06</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 7; background: #2dd4bf;">
+                    <span class="category">Transfers</span>
+                    <span class="amount">$350.00</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 6; background: #60a5fa;">
+                    <span class="category">Utilities</span>
+                    <span class="amount">$313.01</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 5; background: #34d399;">
+                    <span class="category">Groceries</span>
+                    <span class="amount">$251.96</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 3; background: #ec4899;">
+                    <span class="category">Subscriptions</span>
+                    <span class="amount">$125.49</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 2; background: #c084fc;">
+                    <span class="category">Merchandise</span>
+                    <span class="amount">$124.66</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 1; background: #fb923c;">
+                    <span class="category">Dining</span>
+                    <span class="amount">$59.12</span>
+                </div>
+                <div class="treemap-item" style="flex-grow: 1; background: #fbbf24;">
+                    <span class="category">Entertainment</span>
+                    <span class="amount">$49.97</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transaction Table -->
+        <section class="table-section">
+            <h2 class="section-title">All Transactions</h2>
+            <div class="table-container">
+                <table id="transactionTable">
+                    <thead>
+                        <tr>
+                            <th data-sort="date">Date <span class="sort-indicator">&#9650;</span></th>
+                            <th data-sort="description">Description <span class="sort-indicator">&#9650;</span></th>
+                            <th data-sort="category">Category <span class="sort-indicator">&#9650;</span></th>
+                            <th data-sort="deposit">Deposit <span class="sort-indicator">&#9650;</span></th>
+                            <th data-sort="withdrawal">Withdrawal <span class="sort-indicator">&#9650;</span></th>
+                            <th data-sort="balance">Balance <span class="sort-indicator">&#9650;</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2026-01-31</td>
+                            <td>Amazon Prime</td>
+                            <td><span class="category-pill subscriptions">Subscriptions and Renewals</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$14.99</td>
+                            <td>$40,956.78</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-30</td>
+                            <td>OpenAI Compute Tier</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$200.00</td>
+                            <td>$40,971.77</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-29</td>
+                            <td>Replicate</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$12.50</td>
+                            <td>$41,171.77</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-28</td>
+                            <td>OpenAI Agents API</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$200.00</td>
+                            <td>$41,184.27</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-28</td>
+                            <td>Trader Joes</td>
+                            <td><span class="category-pill groceries">Groceries</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$67.23</td>
+                            <td>$41,384.27</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-27</td>
+                            <td>DoorDash Chipotle</td>
+                            <td><span class="category-pill restaurants">Restaurants and Dining</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$24.56</td>
+                            <td>$41,451.50</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-26</td>
+                            <td>OpenAI ChatGPT</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$20.00</td>
+                            <td>$41,476.06</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-25</td>
+                            <td>Anthropic Compute API</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$200.00</td>
+                            <td>$41,496.06</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-25</td>
+                            <td>Whole Foods</td>
+                            <td><span class="category-pill groceries">Groceries</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$89.34</td>
+                            <td>$41,696.06</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-24</td>
+                            <td>Interest Payment</td>
+                            <td><span class="category-pill interest">Interest</span></td>
+                            <td class="deposit">$1.25</td>
+                            <td class="withdrawal">-</td>
+                            <td>$41,785.40</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-24</td>
+                            <td>Anthropic</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$20.00</td>
+                            <td>$41,784.15</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-23</td>
+                            <td>Anthropic Agents Tier</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$200.00</td>
+                            <td>$41,804.15</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-23</td>
+                            <td>Amazon</td>
+                            <td><span class="category-pill merchandise">General Merchandise</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$45.67</td>
+                            <td>$42,004.15</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-22</td>
+                            <td>TradingView</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$14.95</td>
+                            <td>$42,049.82</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-21</td>
+                            <td>Spectrum</td>
+                            <td><span class="category-pill utilities">Utilities</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$85.00</td>
+                            <td>$42,064.77</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-20</td>
+                            <td>Venmo Payment</td>
+                            <td><span class="category-pill transfers">Transfers</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$150.00</td>
+                            <td>$42,149.77</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-19</td>
+                            <td>Cursor AI</td>
+                            <td><span class="category-pill utilities">Utilities</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$20.00</td>
+                            <td>$42,299.77</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-18</td>
+                            <td>Google Gemini Compute</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$200.00</td>
+                            <td>$42,319.77</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-18</td>
+                            <td>Park Slope Food Coop</td>
+                            <td><span class="category-pill groceries">Groceries</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$52.18</td>
+                            <td>$42,519.77</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-17</td>
+                            <td>ElevenLabs</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$22.00</td>
+                            <td>$42,571.95</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-16</td>
+                            <td>Google Gemini Agents</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$200.00</td>
+                            <td>$42,593.95</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-16</td>
+                            <td>Apple Cash</td>
+                            <td><span class="category-pill transfers">Transfers</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$200.00</td>
+                            <td>$42,793.95</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-15</td>
+                            <td>ACME Software Payroll</td>
+                            <td><span class="category-pill income">Income</span></td>
+                            <td class="deposit">$8,250.00</td>
+                            <td class="withdrawal">-</td>
+                            <td>$42,993.95</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-14</td>
+                            <td>Con Edison</td>
+                            <td><span class="category-pill utilities">Utilities</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$95.67</td>
+                            <td>$34,743.95</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-13</td>
+                            <td>Dept of Education Student Loan</td>
+                            <td><span class="category-pill loans">Loans</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$295.78</td>
+                            <td>$34,839.62</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-12</td>
+                            <td>Brooklyn Boulders</td>
+                            <td><span class="category-pill subscriptions">Subscriptions and Renewals</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$92.50</td>
+                            <td>$35,135.40</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-11</td>
+                            <td>Russ and Daughters</td>
+                            <td><span class="category-pill restaurants">Restaurants and Dining</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$34.56</td>
+                            <td>$35,227.90</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-10</td>
+                            <td>National Grid</td>
+                            <td><span class="category-pill utilities">Utilities</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$112.34</td>
+                            <td>$35,262.46</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-09</td>
+                            <td>Google Cloud</td>
+                            <td><span class="category-pill services">Services and Supplies</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$42.87</td>
+                            <td>$35,374.80</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-08</td>
+                            <td>Google GSuite</td>
+                            <td><span class="category-pill subscriptions">Subscriptions and Renewals</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$18.00</td>
+                            <td>$35,417.67</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-07</td>
+                            <td>Ava Realty Management</td>
+                            <td><span class="category-pill housing">Housing</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$2,395.00</td>
+                            <td>$35,435.67</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-06</td>
+                            <td>Trader Joes</td>
+                            <td><span class="category-pill groceries">Groceries</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$43.21</td>
+                            <td>$37,830.67</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-05</td>
+                            <td>Amazon</td>
+                            <td><span class="category-pill merchandise">General Merchandise</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$78.99</td>
+                            <td>$37,873.88</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-04</td>
+                            <td>Max</td>
+                            <td><span class="category-pill entertainment">Entertainment</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$15.99</td>
+                            <td>$37,952.87</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-03</td>
+                            <td>Spotify</td>
+                            <td><span class="category-pill entertainment">Entertainment</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$10.99</td>
+                            <td>$37,968.86</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-02</td>
+                            <td>Educational Comp Loan Payment</td>
+                            <td><span class="category-pill loans">Loans</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$127.28</td>
+                            <td>$37,979.85</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-01</td>
+                            <td>Netflix</td>
+                            <td><span class="category-pill entertainment">Entertainment</span></td>
+                            <td class="deposit">-</td>
+                            <td class="withdrawal">$22.99</td>
+                            <td>$38,107.13</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Table sorting functionality
+        let sortDirection = {};
+
+        document.querySelectorAll('th[data-sort]').forEach(th => {
+            th.addEventListener('click', () => {
+                const column = th.dataset.sort;
+                const table = document.getElementById('transactionTable');
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                // Toggle sort direction
+                sortDirection[column] = sortDirection[column] === 'asc' ? 'desc' : 'asc';
+                const dir = sortDirection[column];
+
+                // Update sort indicators
+                document.querySelectorAll('th').forEach(header => {
+                    header.classList.remove('sorted');
+                    header.querySelector('.sort-indicator').innerHTML = '&#9650;';
+                });
+                th.classList.add('sorted');
+                th.querySelector('.sort-indicator').innerHTML = dir === 'asc' ? '&#9650;' : '&#9660;';
+
+                // Sort rows
+                rows.sort((a, b) => {
+                    let aVal, bVal;
+                    const columnIndex = {
+                        'date': 0,
+                        'description': 1,
+                        'category': 2,
+                        'deposit': 3,
+                        'withdrawal': 4,
+                        'balance': 5
+                    }[column];
+
+                    aVal = a.cells[columnIndex].textContent.trim();
+                    bVal = b.cells[columnIndex].textContent.trim();
+
+                    // Handle numeric values
+                    if (['deposit', 'withdrawal', 'balance'].includes(column)) {
+                        aVal = aVal === '-' ? 0 : parseFloat(aVal.replace(/[$,]/g, ''));
+                        bVal = bVal === '-' ? 0 : parseFloat(bVal.replace(/[$,]/g, ''));
+                        return dir === 'asc' ? aVal - bVal : bVal - aVal;
+                    }
+
+                    // Handle date
+                    if (column === 'date') {
+                        return dir === 'asc'
+                            ? new Date(aVal) - new Date(bVal)
+                            : new Date(bVal) - new Date(aVal);
+                    }
+
+                    // Handle text
+                    return dir === 'asc'
+                        ? aVal.localeCompare(bVal)
+                        : bVal.localeCompare(aVal);
+                });
+
+                // Re-append sorted rows
+                rows.forEach(row => tbody.appendChild(row));
+            });
+        });
+    </script>
+</body>
+</html>

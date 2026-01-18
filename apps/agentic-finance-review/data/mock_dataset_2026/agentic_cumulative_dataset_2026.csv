@@ -1,0 +1,76 @@
+date,description,category,deposit,withdrawal,balance,account_name
+2026-02-28,Amazon Prime Amzn.com/bi WA,subscriptions,,14.99,43692.34,checkings
+2026-02-27,OPENAI COMPUTE TIER HTTPSOPENAI CA,engineering,,200.00,43707.33,checkings
+2026-02-27,REPLICATE HTTPSREPLIC CA,engineering,,25.00,43907.33,checkings
+2026-02-26,TRADER JOES #517 BROOKLYN NY,food,,78.45,43932.33,checkings
+2026-02-25,OPENAI AGENTS API HTTPSOPENAI CA,engineering,,200.00,44010.78,checkings
+2026-02-25,DD DOORDASH SWEETGREEN CA,food,,19.87,44210.78,checkings
+2026-02-24,OPENAI CHATGPT SUBSCR HTTPSOPENAI CA,engineering,,20.00,44230.65,checkings
+2026-02-24,OPENAI API USAGE HTTPSOPENAI CA,engineering,,87.50,44250.65,checkings
+2026-02-23,WHOLE FOODS MKT MANHATTAN NY,food,,112.34,44338.15,checkings
+2026-02-22,INTEREST PAYMENT,income,1.89,,44450.49,checkings
+2026-02-22,ANTHROPIC COMPUTE API HTTPSWWW.AN CA,engineering,,200.00,44448.60,checkings
+2026-02-22,ANTHROPIC HTTPSWWW.AN CA,engineering,,20.00,44648.60,checkings
+2026-02-21,Amazon.com Amzn.com/bi WA,amazon,,234.56,44668.60,checkings
+2026-02-20,ANTHROPIC AGENTS TIER HTTPSWWW.AN CA,engineering,,200.00,44903.16,checkings
+2026-02-20,TRADINGVIEWVPRODUCT TV.SUPPORT OH,trading,,14.95,45103.16,checkings
+2026-02-19,SPECTRUM NYC NY,bills,,85.00,45118.11,checkings
+2026-02-18,VENMO PAYMENT,transfers,,75.00,45203.11,checkings
+2026-02-17,CURSOR AI POWERED IDE HTTPSCURSOR NY,engineering,,20.00,45278.11,checkings
+2026-02-16,PARK SLOPE FOOD COOP BROOKLYN NY,food,,45.67,45298.11,checkings
+2026-02-15,ACME SOFTWARE LLC PAYROLL,income,8250.00,,45343.78,checkings
+2026-02-15,GOOGLE GEMINI COMPUTE g.co/HelpPa CA,engineering,,200.00,37093.78,checkings
+2026-02-15,ELEVENLABS.IO ELEVENLABS NY,engineering,,22.00,37293.78,checkings
+2026-02-14,FLOWERS BY DESIGN NEW YORK NY,other,,89.99,37315.78,checkings
+2026-02-13,GOOGLE GEMINI AGENTS g.co/HelpPa CA,engineering,,200.00,37405.77,checkings
+2026-02-13,CON EDISON CONED,bills,,102.45,37605.77,checkings
+2026-02-12,DEPT EDUCATION STUDENT LN,loans,,295.78,37708.22,checkings
+2026-02-11,BROOKLYN BOULDERS WWW.BRKBOUL NY,health,,92.50,38004.00,checkings
+2026-02-10,TST RUSS & DAUGHTERS NEW YORK NY,food,,42.34,38096.50,checkings
+2026-02-09,NATIONAL GRID NY NY,bills,,98.76,38138.84,checkings
+2026-02-08,GOOGLE CLOUD g.co/HelpPa CA,engineering,,56.23,38237.60,checkings
+2026-02-07,GOOGLE GSUITE_appdev cc@google.c CA,engineering,,18.00,38293.83,checkings
+2026-02-06,AVA REALTY MANAGEMENT NY,bills,,2395.00,38311.83,checkings
+2026-02-05,TRADER JOES #517 BROOKLYN NY,food,,56.78,40706.83,checkings
+2026-02-04,AMAZON MKTPL Amzn.com/bi WA,amazon,,123.45,40763.61,checkings
+2026-02-03,HELP.MAX.COM MAX.COM NY,entertainment,,15.99,40887.06,checkings
+2026-02-03,SPOTIFY USA SPOTIFY.COM NY,entertainment,,10.99,40903.05,checkings
+2026-02-02,EDUCATIONAL COMP ACH LNPYMT,loans,,127.28,40914.04,checkings
+2026-02-01,NETFLIX.COM NETFLIX.COM CA,entertainment,,22.99,41041.32,checkings
+2026-01-31,Amazon Prime,Subscriptions and Renewals,,14.99,40956.78,checkings
+2026-01-30,OpenAI Compute Tier,Services and Supplies,,200.00,40971.77,checkings
+2026-01-29,Replicate,Services and Supplies,,12.50,41171.77,checkings
+2026-01-28,OpenAI Agents API,Services and Supplies,,200.00,41184.27,checkings
+2026-01-28,Trader Joes,Groceries,,67.23,41384.27,checkings
+2026-01-27,DoorDash Chipotle,Restaurants and Dining,,24.56,41451.50,checkings
+2026-01-26,OpenAI ChatGPT,Services and Supplies,,20.00,41476.06,checkings
+2026-01-25,Anthropic Compute API,Services and Supplies,,200.00,41496.06,checkings
+2026-01-25,Whole Foods,Groceries,,89.34,41696.06,checkings
+2026-01-24,Interest Payment,Interest,1.25,,41785.40,checkings
+2026-01-24,Anthropic,Services and Supplies,,20.00,41784.15,checkings
+2026-01-23,Anthropic Agents Tier,Services and Supplies,,200.00,41804.15,checkings
+2026-01-23,Amazon,General Merchandise,,45.67,42004.15,checkings
+2026-01-22,TradingView,Services and Supplies,,14.95,42049.82,checkings
+2026-01-21,Spectrum,Utilities,,85.00,42064.77,checkings
+2026-01-20,Venmo Payment,Transfers,,150.00,42149.77,checkings
+2026-01-19,Cursor AI,Utilities,,20.00,42299.77,checkings
+2026-01-18,Google Gemini Compute,Services and Supplies,,200.00,42319.77,checkings
+2026-01-18,Park Slope Food Coop,Groceries,,52.18,42519.77,checkings
+2026-01-17,ElevenLabs,Services and Supplies,,22.00,42571.95,checkings
+2026-01-16,Google Gemini Agents,Services and Supplies,,200.00,42593.95,checkings
+2026-01-16,Apple Cash,Transfers,,200.00,42793.95,checkings
+2026-01-15,ACME Software Payroll,Income,8250.00,,42993.95,checkings
+2026-01-14,Con Edison,Utilities,,95.67,34743.95,checkings
+2026-01-13,Dept of Education Student Loan,Loans,,295.78,34839.62,checkings
+2026-01-12,Brooklyn Boulders,Subscriptions and Renewals,,92.50,35135.40,checkings
+2026-01-11,Russ and Daughters,Restaurants and Dining,,34.56,35227.90,checkings
+2026-01-10,National Grid,Utilities,,112.34,35262.46,checkings
+2026-01-09,Google Cloud,Services and Supplies,,42.87,35374.80,checkings
+2026-01-08,Google GSuite,Subscriptions and Renewals,,18.00,35417.67,checkings
+2026-01-07,Ava Realty Management,Housing,,2395.00,35435.67,checkings
+2026-01-06,Trader Joes,Groceries,,43.21,37830.67,checkings
+2026-01-05,Amazon,General Merchandise,,78.99,37873.88,checkings
+2026-01-04,Max,Entertainment,,15.99,37952.87,checkings
+2026-01-03,Spotify,Entertainment,,10.99,37968.86,checkings
+2026-01-02,Educational Comp Loan Payment,Loans,,127.28,37979.85,checkings
+2026-01-01,Netflix,Entertainment,,22.99,38107.13,checkings

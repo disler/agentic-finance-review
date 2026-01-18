@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+.ruff_cache/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+dont_stop.log
+
+# Validator state files
+.demo-validator-state
+
+# Temp
+temp/
+
+# Environment
+.env
+.env.local
+
+# MCP config (contains API keys)
+.mcp.json
+
+# Agentic Finance Review - ignore non-mock data directories
+apps/agentic-finance-review/data/*/
+!apps/agentic-finance-review/data/mock_*/
+
+# Keep the mock datasets
+!apps/agentic-finance-review/data/mock_dataset_2026/
+
+# AI docs - ignore scraped content except README
+ai_docs/*
+!ai_docs/README.md
+
+
+justfile
+
+specs/init.md
+
+scripts/dont_stop.py

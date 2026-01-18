@@ -1,0 +1,38 @@
+date,description,category,deposit,withdrawal,balance,account_name
+2026-01-31,Amazon Prime,Subscriptions and Renewals,,14.99,40956.78,checkings
+2026-01-30,OpenAI Compute Tier,Services and Supplies,,200.00,40971.77,checkings
+2026-01-29,Replicate,Services and Supplies,,12.50,41171.77,checkings
+2026-01-28,OpenAI Agents API,Services and Supplies,,200.00,41184.27,checkings
+2026-01-28,Trader Joes,Groceries,,67.23,41384.27,checkings
+2026-01-27,DoorDash Chipotle,Restaurants and Dining,,24.56,41451.50,checkings
+2026-01-26,OpenAI ChatGPT,Services and Supplies,,20.00,41476.06,checkings
+2026-01-25,Anthropic Compute API,Services and Supplies,,200.00,41496.06,checkings
+2026-01-25,Whole Foods,Groceries,,89.34,41696.06,checkings
+2026-01-24,Interest Payment,Interest,1.25,,41785.40,checkings
+2026-01-24,Anthropic,Services and Supplies,,20.00,41784.15,checkings
+2026-01-23,Anthropic Agents Tier,Services and Supplies,,200.00,41804.15,checkings
+2026-01-23,Amazon,General Merchandise,,45.67,42004.15,checkings
+2026-01-22,TradingView,Services and Supplies,,14.95,42049.82,checkings
+2026-01-21,Spectrum,Utilities,,85.00,42064.77,checkings
+2026-01-20,Venmo Payment,Transfers,,150.00,42149.77,checkings
+2026-01-19,Cursor AI,Utilities,,20.00,42299.77,checkings
+2026-01-18,Google Gemini Compute,Services and Supplies,,200.00,42319.77,checkings
+2026-01-18,Park Slope Food Coop,Groceries,,52.18,42519.77,checkings
+2026-01-17,ElevenLabs,Services and Supplies,,22.00,42571.95,checkings
+2026-01-16,Google Gemini Agents,Services and Supplies,,200.00,42593.95,checkings
+2026-01-16,Apple Cash,Transfers,,200.00,42793.95,checkings
+2026-01-15,ACME Software Payroll,Income,8250.00,,42993.95,checkings
+2026-01-14,Con Edison,Utilities,,95.67,34743.95,checkings
+2026-01-13,Dept of Education Student Loan,Loans,,295.78,34839.62,checkings
+2026-01-12,Brooklyn Boulders,Subscriptions and Renewals,,92.50,35135.40,checkings
+2026-01-11,Russ and Daughters,Restaurants and Dining,,34.56,35227.90,checkings
+2026-01-10,National Grid,Utilities,,112.34,35262.46,checkings
+2026-01-09,Google Cloud,Services and Supplies,,42.87,35374.80,checkings
+2026-01-08,Google GSuite,Subscriptions and Renewals,,18.00,35417.67,checkings
+2026-01-07,Ava Realty Management,Housing,,2395.00,35435.67,checkings
+2026-01-06,Trader Joes,Groceries,,43.21,37830.67,checkings
+2026-01-05,Amazon,General Merchandise,,78.99,37873.88,checkings
+2026-01-04,Max,Entertainment,,15.99,37952.87,checkings
+2026-01-03,Spotify,Entertainment,,10.99,37968.86,checkings
+2026-01-02,Educational Comp Loan Payment,Loans,,127.28,37979.85,checkings
+2026-01-01,Netflix,Entertainment,,22.99,38107.13,checkings
